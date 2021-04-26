@@ -105,6 +105,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+    // 单例初始化的时候获取用户 获取用户的信息.
     @Bean
     public UserDetailsService userDetailsService() {
         //获取登录用户信息
