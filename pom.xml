@@ -63,17 +63,29 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.15</version>
         </dependency>
+
         <!--Swagger-UI API文档生产工具-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
+            <version>2.9.2</version>
         </dependency>
+
+        <!-- swagger-ui，原生swagger-Ui界面，访问后缀（默认的）：swagger-ui.html-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.7.0</version>
+            <version>2.9.2</version>
         </dependency>
+
+        <!-- bootstrap-ui,只是在改变页面效果，访问后缀：doc.html -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+
+
         <!--redis依赖配置-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -96,6 +108,8 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
         </dependency>
+
+
     </dependencies>
 
     <build>

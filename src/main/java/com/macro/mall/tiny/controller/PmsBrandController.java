@@ -93,7 +93,8 @@ public class PmsBrandController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     @PreAuthorize("hasAuthority('pms:brand:read')")
-    public CommonResult<CommonPage<PmsBrand>> listBrand(@RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum, @RequestParam(value = "pageSize", defaultValue = "3") @ApiParam("每页数量") Integer pageSize) {
+    public CommonResult<CommonPage<PmsBrand>> listBrand(@RequestParam(value = "pageNum", defaultValue = "1") @ApiParam(name = "页码", example = "1") Integer pageNum,
+                                                        @RequestParam(value = "pageSize", defaultValue = "3") @ApiParam(name = "每页数量", example = "10") Integer pageSize) {
         List<PmsBrand> brandList = brandService.listBrand(pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(brandList));
     }

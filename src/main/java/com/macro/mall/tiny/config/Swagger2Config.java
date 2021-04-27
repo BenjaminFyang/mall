@@ -2,18 +2,18 @@ package com.macro.mall.tiny.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.SecurityReference;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +24,21 @@ import java.util.List;
 @EnableSwagger2
 public class Swagger2Config {
 
+//    @Resource
+//    private Environment environment;
+
     @Bean
     public Docket createRestApi() {
+
+        // 设置显示的swagger环境信息
+//        Profiles profiles = Profiles.of("dev", "test");
+        // 判断是否处在自己设定的环境当中
+//        boolean flag = environment.acceptsProfiles(profiles);
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+//                .groupName("分组名称")  // 配置api文档的分组
+//                .enable(flag)  // 配置是否开启swagger
                 .select()
                 //为当前包下controller生成API文档
                 .apis(RequestHandlerSelectors.basePackage("com.macro.mall.tiny.controller"))
@@ -43,7 +54,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title("SwaggerUI演示")
                 .description("mall-tiny")
-                .contact("macro")
+                .contact(new Contact("方洋", "http://mail.qq.com", "824410800@qq.com"))
                 .version("1.0")
                 .build();
     }
