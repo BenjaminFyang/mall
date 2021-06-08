@@ -5,10 +5,11 @@ import cn.hutool.core.util.URLUtil;
 import cn.hutool.json.JSONUtil;
 import com.macro.mall.tiny.dto.WebLog;
 import io.swagger.annotations.ApiOperation;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,22 +34,16 @@ import java.util.Map;
 @Component
 @Order(1)
 public class WebLogAspect {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
 
     @Pointcut("execution(public * com.macro.mall.tiny.controller.*.*(..))")
     public void webLog() {
     }
 
-    @Before("webLog()")
-    public void doBefore(JoinPoint joinPoint) {
-    }
-
-    @AfterReturning(value = "webLog()", returning = "ret")
-    public void doAfterReturning(Object ret) {
-    }
-
     @Around("webLog()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+
         long startTime = System.currentTimeMillis();
         //获取当前请求对象
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -102,6 +97,7 @@ public class WebLogAspect {
                 argList.add(map);
             }
         }
+
         if (argList.size() == 0) {
             return null;
         } else if (argList.size() == 1) {
@@ -109,5 +105,6 @@ public class WebLogAspect {
         } else {
             return argList;
         }
+
     }
 }
