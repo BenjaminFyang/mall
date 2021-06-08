@@ -18,7 +18,7 @@ import java.util.List;
  * Created by macro on 2018/6/19.
  */
 @Controller
-@Api(tags = "搜索商品管理", description = "搜索商品管理")
+@Api(tags = "搜索商品管理")
 @RequestMapping("/esProduct")
 public class EsProductController {
 

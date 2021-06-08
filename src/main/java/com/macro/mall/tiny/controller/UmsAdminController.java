@@ -27,7 +27,7 @@ import java.util.Map;
 
 
 @Controller
-@Api(tags = "UmsAdminController", description = "后台用户管理")
+@Api(tags = "后台用户管理")
 @RequestMapping("/admin")
 public class UmsAdminController {
 
@@ -38,7 +38,7 @@ public class UmsAdminController {
 
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
-    
+
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
