@@ -1,12 +1,15 @@
 package com.macro.mall.tiny.controller;
 
 import com.macro.mall.tiny.common.api.CommonResult;
+import com.macro.mall.tiny.component.OrderTimeOutCancelTask;
 import com.macro.mall.tiny.dto.UmsAdminLoginParam;
 import com.macro.mall.tiny.mbg.model.UmsAdmin;
 import com.macro.mall.tiny.mbg.model.UmsPermission;
 import com.macro.mall.tiny.service.UmsAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,10 +24,14 @@ import java.util.Map;
  * 后台用户管理
  * Created by macro on 2018/4/26.
  */
+
+
 @Controller
 @Api(tags = "UmsAdminController", description = "后台用户管理")
 @RequestMapping("/admin")
 public class UmsAdminController {
+
+    private Logger LOGGER = LoggerFactory.getLogger(UmsAdminController.class);
 
     @Resource
     private UmsAdminService adminService;
@@ -64,6 +71,8 @@ public class UmsAdminController {
     @RequestMapping(value = "/permission/{adminId}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<UmsPermission>> getPermissionList(@PathVariable Long adminId) {
+
+        LOGGER.info("获取用户所有权限（包括+-权限)");
         List<UmsPermission> permissionList = adminService.getPermissionList(adminId);
         return CommonResult.success(permissionList);
     }

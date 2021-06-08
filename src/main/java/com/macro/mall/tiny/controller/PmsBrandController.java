@@ -22,7 +22,7 @@ import java.util.List;
  * 品牌管理Controller
  * Created by macro on 2019/4/19.
  */
-@Api(tags = "PmsBrandController", description = "商品品牌管理")
+@Api(tags = "商品品牌管理", description = "商品品牌管理")
 @Controller
 @RequestMapping("/brand")
 public class PmsBrandController {
@@ -105,5 +105,9 @@ public class PmsBrandController {
     @PreAuthorize("hasAuthority('pms:brand:read')")
     public CommonResult<PmsBrand> brand(@PathVariable("id") Long id) {
         return CommonResult.success(brandService.getBrand(id));
+    }
+
+    private static String replaceParentheses(String str) {
+        return str.replaceAll("[()]", "-").replaceAll("（", "-").replaceAll("）", "");
     }
 }
