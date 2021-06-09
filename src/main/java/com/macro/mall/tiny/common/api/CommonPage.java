@@ -1,7 +1,9 @@
 package com.macro.mall.tiny.common.api;
 
-import com.github.pagehelper.PageInfo;
+import com.macro.mall.tiny.mbg.model.PmsBrand;
 import org.springframework.data.domain.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -42,6 +44,18 @@ public class CommonPage<T> {
         result.setList(pageInfo.getContent());
         return result;
     }
+
+
+    public static <T> CommonPage<T> restPage(PageInfo<T> pageInfo) {
+        CommonPage<T> result = new CommonPage<T>();
+        result.setTotalPage(pageInfo.getPages());
+        result.setPageNum(pageInfo.getPageNum());
+        result.setPageSize(pageInfo.getPageSize());
+        result.setTotal(pageInfo.getTotal());
+        result.setList(pageInfo.getList());
+        return result;
+    }
+
 
     public Integer getPageNum() {
         return pageNum;

@@ -1,5 +1,6 @@
 package com.macro.mall.tiny.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.macro.mall.tiny.common.api.CommonPage;
 import com.macro.mall.tiny.common.api.CommonResult;
 import com.macro.mall.tiny.mbg.model.PmsBrand;
@@ -35,7 +36,7 @@ public class PmsBrandController {
     @ApiOperation("获取所有品牌列表")
     @RequestMapping(value = "listAll", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:read')")
+//    @PreAuthorize("hasAuthority('pms:brand:read')")
     public CommonResult<List<PmsBrand>> getBrandList() {
         return CommonResult.success(brandService.listAllBrand());
     }
@@ -43,7 +44,7 @@ public class PmsBrandController {
     @ApiOperation("添加品牌")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:create')")
+//    @PreAuthorize("hasAuthority('pms:brand:create')")
     public CommonResult createBrand(@RequestBody PmsBrand pmsBrand) {
         CommonResult commonResult;
         int count = brandService.createBrand(pmsBrand);
@@ -60,7 +61,7 @@ public class PmsBrandController {
     @ApiOperation("更新指定id品牌信息")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:update')")
+//    @PreAuthorize("hasAuthority('pms:brand:update')")
     public CommonResult updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto, BindingResult result) {
         CommonResult commonResult;
         int count = brandService.updateBrand(id, pmsBrandDto);
@@ -77,7 +78,7 @@ public class PmsBrandController {
     @ApiOperation("删除指定id的品牌")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:delete')")
+//    @PreAuthorize("hasAuthority('pms:brand:delete')")
     public CommonResult deleteBrand(@PathVariable("id") Long id) {
         int count = brandService.deleteBrand(id);
         if (count == 1) {
@@ -92,22 +93,19 @@ public class PmsBrandController {
     @ApiOperation("分页查询品牌列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:read')")
+//    @PreAuthorize("hasAuthority('pms:brand:read')")
     public CommonResult<CommonPage<PmsBrand>> listBrand(@RequestParam(value = "pageNum", defaultValue = "1") @ApiParam(name = "页码", example = "1") Integer pageNum,
                                                         @RequestParam(value = "pageSize", defaultValue = "3") @ApiParam(name = "每页数量", example = "10") Integer pageSize) {
-        List<PmsBrand> brandList = brandService.listBrand(pageNum, pageSize);
-        return CommonResult.success(CommonPage.restPage(brandList));
+        PageInfo<PmsBrand> pmsBrandPageInfo = brandService.listBrand(pageNum, pageSize);
+        return CommonResult.success(CommonPage.restPage(pmsBrandPageInfo));
     }
 
     @ApiOperation("获取指定id的品牌详情")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:read')")
+//    @PreAuthorize("hasAuthority('pms:brand:read')")
     public CommonResult<PmsBrand> brand(@PathVariable("id") Long id) {
         return CommonResult.success(brandService.getBrand(id));
     }
 
-    private static String replaceParentheses(String str) {
-        return str.replaceAll("[()]", "-").replaceAll("（", "-").replaceAll("）", "");
-    }
 }

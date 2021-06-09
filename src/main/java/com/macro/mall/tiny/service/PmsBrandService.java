@@ -1,6 +1,7 @@
 package com.macro.mall.tiny.service;
 
 
+import com.github.pagehelper.PageInfo;
 import com.macro.mall.tiny.mbg.model.PmsBrand;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface PmsBrandService {
 
     int deleteBrand(Long id);
 
-    List<PmsBrand> listBrand(int pageNum, int pageSize);
+    PageInfo<PmsBrand> listBrand(int pageNum, int pageSize);
 
     PmsBrand getBrand(Long id);
 }

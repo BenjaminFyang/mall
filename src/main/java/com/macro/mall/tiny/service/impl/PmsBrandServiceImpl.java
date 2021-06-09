@@ -1,6 +1,8 @@
 package com.macro.mall.tiny.service.impl;
 
+
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.macro.mall.tiny.mbg.mapper.PmsBrandMapper;
 import com.macro.mall.tiny.mbg.model.PmsBrand;
 import com.macro.mall.tiny.mbg.model.PmsBrandExample;
@@ -42,9 +44,8 @@ public class PmsBrandServiceImpl implements PmsBrandService {
     }
 
     @Override
-    public List<PmsBrand> listBrand(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        return brandMapper.selectByExample(new PmsBrandExample());
+    public PageInfo<PmsBrand> listBrand(int pageNum, int pageSize) {
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> brandMapper.selectByExample(new PmsBrandExample()));
     }
 
     @Override

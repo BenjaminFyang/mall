@@ -1,12 +1,13 @@
 package com.macro.mall.tiny.mbg.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.macro.mall.tiny.mbg.model.PmsBrand;
 import com.macro.mall.tiny.mbg.model.PmsBrandExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface PmsBrandMapper {
+public interface PmsBrandMapper extends BaseMapper<PmsBrand> {
     int countByExample(PmsBrandExample example);
 
     int deleteByExample(PmsBrandExample example);
